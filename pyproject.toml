@@ -1,0 +1,13 @@
+[project]
+name = "deep-research-skill"
+version = "0.1.0"
+description = "Unified Python environment for the deep-research skill and all its dependency skills (reddit, twitter, linkedin, wechat-article, youtube)"
+requires-python = ">=3.12"
+# Union of third-party imports across every skill's scripts/.
+# Everything else they import is either the Python stdlib or a local
+# sibling module run from the script's own directory.
+dependencies = [
+    "composio>=0.11.0",
+    "requests>=2.31.0",
+    "toon_format @ git+https://github.com/toon-format/toon-python.git",
+]

@@ -2,11 +2,13 @@
 
 ## Runtime Environment
 
-Managed via **uv** with an isolated `.venv` (Python 3.12).
+In this bundle, all Python skills share **one** uv environment defined by the
+repo-root `pyproject.toml` (Python 3.12). Set it up once at the repo root:
 
 ```bash
-uv sync          # create/update venv
-uv run python scripts/search_tweets.py "keyword"
+uv sync                     # repo root — creates the shared ./.venv
+source .venv/bin/activate
+python3 skills/twitter/scripts/search_tweets.py "keyword"
 ```
 
 ## Python Packages
@@ -19,9 +21,9 @@ uv run python scripts/search_tweets.py "keyword"
 ## Auth Setup
 
 ### twitterapi.io (primary)
-Set `TWITTER_API_KEY` in `~/.zshrc`:
+Set `TWITTERAPI_API_KEY` in `~/.zshrc` (this is the name the scripts read):
 ```bash
-export TWITTER_API_KEY="your_key_here"
+export TWITTERAPI_API_KEY="your_key_here"
 ```
 
 ### Composio (alternative)

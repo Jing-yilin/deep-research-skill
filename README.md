@@ -60,10 +60,11 @@ for it, and degrades gracefully if a key is missing:
 
 ## Runtime prerequisites
 
-- **Python ≥ 3.12** with [`uv`](https://github.com/astral-sh/uv) (each Python skill is an
-  isolated venv). The Reddit/Twitter scripts also need `toon_format`
-  (`pip install "toon_format @ git+https://github.com/toon-format/toon-python.git"`,
-  or just `uv sync` in the skill dir).
+- **Python ≥ 3.12** with [`uv`](https://github.com/astral-sh/uv). All Python skills
+  (reddit, twitter, linkedin scripts, wechat-article, youtube) share **one** uv
+  environment defined by the root `pyproject.toml` — run `uv sync` once at the repo
+  root. Third-party deps are just `composio`, `requests`, and `toon_format`; everything
+  else each script imports is the stdlib or a local sibling module.
 - **Rust / `cargo`** to build the two CLIs (`linkedin`, `wxa`). Prebuilt binaries and
   venvs are intentionally **not** committed — build them locally (below).
 
@@ -76,10 +77,15 @@ for it, and degrades gracefully if a key is missing:
    set -a; source .env; set +a   # or add the exports to ~/.zshrc
    ```
 
-2. **Build the Python skills** (reddit, twitter, linkedin scripts, person-research deps)
+2. **Create the single shared Python environment** (covers every Python skill)
    ```bash
-   for s in reddit twitter linkedin; do (cd skills/$s && uv sync); done
+   uv sync                 # at the repo root — creates ./.venv with all deps
+   source .venv/bin/activate
    ```
+   Then run any skill script against that venv, e.g.
+   `python3 skills/reddit/scripts/search_posts.py "claude code" --limit 5`.
+   (Scripts add their own `scripts/` dir to `sys.path`, so their local sibling
+   imports work regardless of where you launch them.)
 
 3. **Build the LinkedIn CLI** → `linkedin` (Worker F)
    ```bash

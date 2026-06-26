@@ -2,11 +2,13 @@
 
 ## Runtime Environment
 
-Managed via **uv** with an isolated `.venv` (Python 3.12).
+In this bundle, all Python skills share **one** uv environment defined by the
+repo-root `pyproject.toml` (Python 3.12). Set it up once at the repo root:
 
 ```bash
-uv sync          # create/update venv
-uv run python scripts/search_posts.py "keyword"
+uv sync                     # repo root — creates the shared ./.venv
+source .venv/bin/activate
+python3 skills/reddit/scripts/search_posts.py "keyword"
 ```
 
 ## Python Packages
