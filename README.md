@@ -70,6 +70,9 @@ for it, and degrades gracefully if a key is missing:
 
 ## Install
 
+> For a deterministic, step-by-step setup (agent-followable, with per-step verify
+> commands and troubleshooting), see **[INSTALL.md](./INSTALL.md)**. Quick version below.
+
 1. **Clone & configure keys**
    ```bash
    git clone <this-repo> deep-research-skill && cd deep-research-skill
