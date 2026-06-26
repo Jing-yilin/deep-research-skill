@@ -1,0 +1,14 @@
+# Secrets
+.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+uv.lock
+
+# Rust build artifacts
+**/cli/target/
+
+# OS
+.DS_Store
